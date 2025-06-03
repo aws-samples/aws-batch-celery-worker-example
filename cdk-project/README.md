@@ -4,11 +4,10 @@ This project leverages the  [AWS CDK for Python](https://docs.aws.amazon.com/cdk
 
 In order to run this example, you will need to be able to install and leverage CDK for Python, as well as build Docker containers. 
 
-The easiest path to do so is to leverage AWS Cloud9, an integrated development environment accessible within the AWS Management Console. You can follow the [Getting started guide for AWS Cloud9](https://docs.aws.amazon.com/cloud9/latest/user-guide/tutorial.html) instructions to bootstrap a Cloud9 environment that will work with this example. 
 
 ### Setting up CDK and the project
 
-Once you have a Cloud9 environment (or other development environment that is able to deploy CDK stacks and build Docker containers), open a Terminal window and check out this repository, then navigate to the contained CDK project directory: 
+Once your development environment is installed and configured to be able to deploy CDK stacks and build Docker containers, clone out this repository, then navigate to the contained CDK project directory: 
 
 ```bash
 git clone https://github.com/aws-samples/aws-batch-celery-example.git
@@ -80,14 +79,16 @@ aws batch submit-job --job-name "fillQueue" \
 
 To view the status of the job:
 
-1. Navigate to the [AWS Batch management console](https://console.aws.amazon.com/batch/home)
+1. Navigate to the [AWS Batch management console](https://console.aws.amazon.com/batch/home?#/jobs/list)
 2. On the left-hand side, select the **Jobs** tab, then for job queue select the **batch-celery-job-queue**
 
 ![The AWS Batch management console, showing the Jobs information for the Celery job queue that was created](../images/batch-console-jq-1.png)
 
+Once the job is complete, the specified number of messages will be in the created SQS queue.
+
 To view the status of the Amazon CloudWatch Alarms: 
 
-1. Navigate to the [Amazon CloudWatch management console](https://console.aws.amazon.com/batch/home)
+1. Navigate to the [Amazon CloudWatch management console](https://console.aws.amazon.com/cloudwatch/home?#alarmsV2:)
 2. On the left-hand side, select **All alarms, then enter "**BatchFargateStack**" into the filter. You should see the alarms in **OK** state. 
 
 ![The Amazon CloudWatch management console showing the created alarms for the Celery SQS queue](../images/cw-alarms-ok.png)
@@ -105,5 +106,5 @@ When the alarm enters ALARM state, the EventBridge rule(s) will submit jobs to B
 To clean up your resources and avoid unnessecary charges, leverage CDK to tear down the CloudFormation stacks using the following command: 
 
 ```bash
-cdk destroy BatchCeleryFargateStack
+cdk destroy
 ```

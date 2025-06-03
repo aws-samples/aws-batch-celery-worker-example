@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 from aws_cdk import (
                      aws_ec2 as ec2, 
-                     aws_batch_alpha as batch,
+                     aws_batch as batch,
                      aws_ecr_assets as ecr_assets,
                      aws_sqs as sqs,
                      aws_ecs as ecs,
